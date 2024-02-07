@@ -1,89 +1,45 @@
 import React, { useEffect, useState } from "react";
+import { Toaster } from 'react-hot-toast';
 import "./auth.css";
 import "../../components/footer";
 import user_icon from "../../assets/person.png";
 import email_icon from "../../assets/email.png";
 import password_icon from "../../assets/password.png";
 import BarLoader from "react-spinners/BarLoader";
+import authentication from "../../services/auth_service";
 
 const Auth = () => {
   const [action, setAction] = useState("Login");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setloading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
 
-  const handleSignup = async (e) => {
+  const signUp = async (e) => {
     e.preventDefault();
+    setSubmitting(true); 
+    await authentication.handleSignup(username, email, password, e);
+    setSubmitting(false); 
+  }
 
-    try {
-      const response = await fetch(
-        "https://api.eventchirp.com/api/auth/signup",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ username, email, password }),
-        }
-      );
-
-      const data = await response.json();
-
-      if (response.ok) {
-        console.log("Signup Successful");
-        // You can redirect or perform other actions after successful signup
-        window.location.href = "/";
-      } else {
-        alert(data.error || data.message || "Something went wrong");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      alert("An error occurred. Please try again later.");
-    }
-  };
-
-  const handleLogin = async (e) => {
+  const signIn = async (e) => {
     e.preventDefault();
+    setSubmitting(true); 
+    await authentication.handleLogin(username, password, e);
+    setSubmitting(false); 
+  }
 
-    try {
-      const response = await fetch(
-        "https://api.eventchirp.com/api/auth/signin",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ username, password }),
-        }
-      );
-
-      const data = await response.json();
-      console.log(data);
-      if (response.ok) {
-        console.log("Login Successful");
-        // You can redirect or perform other actions after successful login
-        localStorage.setItem("x-auth-token", data.user.token);
-        localStorage.setItem("username", data.user.username);
-        window.location.href = "/home";
-      } else {
-        alert(data.error || data.message || "Invalid credentials");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      alert("An error occurred. Please try again later.");
-    }
-  };
   useEffect(() => {
-    setloading(true);
     setTimeout(() => {
       if (localStorage.getItem("x-auth-token") != null) {
         window.location.href = "/home";
       } else {
-        setloading(false);
+        setLoading(false);
       }
     }, 3000);
   }, []);
+
   return (
     <>
       {loading ? (
@@ -98,6 +54,7 @@ const Auth = () => {
         </center>
       ) : (
         <div className="main-container backgroud-image">
+          <Toaster />
           <div className="container">
             <div className="">
               <div className="header_login">
@@ -105,8 +62,7 @@ const Auth = () => {
                 <div className="underline"></div>
               </div>
 
-              {/* Form Section */}
-              <form onSubmit={action === "Login" ? handleLogin : handleSignup}>
+              <form onSubmit={action === "Login" ? signIn : signUp}>
                 <div className="input">
                   <img src={user_icon} alt=""></img>
                   <input
@@ -139,8 +95,8 @@ const Auth = () => {
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
-                <button className="login-btn" type="submit">
-                  {action}
+                <button className="login-btn" type="submit" disabled={submitting}>
+                  {submitting ? 'loading...' : action}
                 </button>
                 {action === "Login" ? (
                   <div className="text-formating">

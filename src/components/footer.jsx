@@ -39,7 +39,7 @@ function Footer() {
               <p>All rights reserved</p>
             </div>
           </div>
-          <div className="footer_right">
+          {/* <div className="footer_right">
             <h2>CONTACT US</h2>
             <form>
               <div className="first_line">
@@ -70,7 +70,7 @@ function Footer() {
                 <button>SUBMIT</button>
               </div>
             </form>
-          </div>
+          </div> */}
         </div>
       </footer>
       <script
