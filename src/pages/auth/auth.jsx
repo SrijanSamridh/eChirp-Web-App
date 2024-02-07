@@ -6,7 +6,7 @@ import user_icon from "../../assets/person.png";
 import email_icon from "../../assets/email.png";
 import password_icon from "../../assets/password.png";
 import BarLoader from "react-spinners/BarLoader";
-import authentication from "../../services/auth_service";
+import authentication from "./services/auth_service";
 
 const Auth = () => {
   const [action, setAction] = useState("Login");
