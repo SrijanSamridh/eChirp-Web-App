@@ -1,5 +1,7 @@
 import toast from "react-hot-toast";
 
+const baseURL = "https://api.eventchirp.com/api";
+
 const notify = (message, type = "success") => {
   switch (type) {
     case "success":
@@ -22,7 +24,7 @@ const handleSignup = async (username, email, password, e) => {
   notify("Processing Authentication..", "loading");
 
   try {
-    const response = await fetch("https://api.eventchirp.com/api/auth/signup", {
+    const response = await fetch(`${baseURL}/auth/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -53,7 +55,7 @@ const handleLogin = async (username, password, e) => {
   notify("Processing Authentication..", "loading");
 
   try {
-    const response = await fetch("https://api.eventchirp.com/api/auth/signin", {
+    const response = await fetch(`${baseURL}/auth/signin`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
