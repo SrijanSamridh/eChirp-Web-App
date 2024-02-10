@@ -39,12 +39,14 @@ const postRequest = async (body) => {
     const responseData = await response.json();
     if (response.ok) {
       toast.success(responseData.message);
+      return true;
     } else {
       toast.error(responseData.message);
       throw new Error(responseData.message);
     }
   } catch (error) {
     console.error("Error joining event:", error.message);
+    return false;
   }
 };
 

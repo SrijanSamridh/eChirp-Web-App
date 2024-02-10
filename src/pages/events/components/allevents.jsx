@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Events from "../services/events.services";
 import EventCard from "../components/eventCard";
+import Animations from "../../../components/animations";
 
 function AllEvents() {
   const [events, setEvents] = useState([]);
@@ -14,10 +15,12 @@ function AllEvents() {
     <div className="scrollable-container">
       <h3>All Events</h3>
       {loading ? (
-       // Render 10 skeleton loaders
-       Array.from({ length: 10 }, (_, index) => (
-        <EventCard.SkeletonLoader key={index} />
-      ))
+        // Render 10 skeleton loaders
+        Array.from({ length: 10 }, (_, index) => (
+          <EventCard.SkeletonLoader key={index} />
+        ))
+      ) : events.length === 0 ? (
+        <Animations.NoDataFound/>
       ) : (
         events.map((event) => <EventCard.Card key={event._id} event={event} />)
       )}

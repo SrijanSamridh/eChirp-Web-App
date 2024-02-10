@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Events from "../services/events.services";
 import EventCard from "../components/eventCard";
+import Animations from "../../../components/animations"
+
+
 
 function MyCreatedEvents() {
   const [events, setEvents] = useState([]);
@@ -15,9 +18,11 @@ function MyCreatedEvents() {
       <h3>My Created Events</h3>
       {loading ? (
         // Render 10 skeleton loaders
-       Array.from({ length: 10 }, (_, index) => (
-        <EventCard.SkeletonLoader key={index} />
-      ))
+        Array.from({ length: 10 }, (_, index) => (
+          <EventCard.SkeletonLoader key={index} />
+        ))
+      ) : events.length === 0 ? (
+        <Animations.NoDataFound/>
       ) : (
         events.map((event) => <EventCard.Card key={event._id} event={event} />)
       )}

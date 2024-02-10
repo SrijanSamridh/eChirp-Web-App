@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Toaster } from 'react-hot-toast';
 import "./auth.css";
 import "../../components/footer";
-import user_icon from "../../assets/person.png";
-import email_icon from "../../assets/email.png";
-import password_icon from "../../assets/password.png";
+import user_icon from "../../assets/images/person.png";
+import email_icon from "../../assets/images/email.png";
+import password_icon from "../../assets/images/password.png";
 import BarLoader from "react-spinners/BarLoader";
 import authentication from "./services/auth_service";
 

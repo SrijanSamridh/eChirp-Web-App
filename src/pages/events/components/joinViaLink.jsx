@@ -1,16 +1,30 @@
 import React, { useState } from "react";
 import Events from "../services/events.services";
+import Animations from "../../../components/animations";
 import "../events.css";
 
 function JoinViaLink() {
   const [joinCode, setJoinCode] = useState("");
+  const [response, setResponse] = useState(false);
 
   const handleJoin = async () => {
-    await Events.postRequest(joinCode);
+    const success = await Events.postRequest(joinCode);
+    setResponse(success);
+    if (success) {
+      setTimeout(() => {
+        setResponse(false);
+      }, 5000); // Reset response to false after 3 seconds
+    }
   };
 
-  return (
+  return response ? (
     <div className="join-via-code">
+      <Animations.SuccessMark />
+      <h2>See You In The Event!</h2>
+    </div>
+  ) : (
+    <div className="join-via-code">
+      <Animations.JoinViaCode />
       <div className="join-via-code-container">
         <h2>Join via Link</h2>
         <div className="input-container">
@@ -28,3 +42,4 @@ function JoinViaLink() {
 }
 
 export default JoinViaLink;
+
