@@ -1,0 +1,125 @@
+/* Updated tab bar styles */
+.tab-bar {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0px;
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  z-index: 1;
+}
+
+.tab-bar button {
+  padding: 10px 20px;
+  background-color: transparent;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  background-color: #f69042;
+  color: #fff;
+}
+
+.tab-bar button.active {
+  background-color: #4d4d4d;
+  color: #fff;
+}
+
+.tab-bar button:hover {
+  background-color: #4d4d4d;
+  color: #fff;
+}
+
+/* Updated heading styles */
+h2 {
+  margin: 20px 0px;
+  text-align: center;
+}
+
+/* Scrollable content */
+.scrollable-content {
+  margin: 0 10% 10% 10%;
+  max-height: calc(100vh - 300px);
+  overflow-y: auto;
+}
+
+/* Event card container */
+.event-card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease;
+}
+
+/* Hover effect */
+.event-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Event title */
+.event-card h4 {
+  margin-bottom: 10px;
+  color: #333;
+  font-size: 1.5rem;
+}
+
+/* Event description */
+.event-card p {
+  color: #666;
+  line-height: 1.5;
+}
+
+/* Date and time */
+.event-card .datetime {
+  margin-top: 10px;
+  color: #888;
+}
+
+/* Location */
+.event-card .location {
+  color: #888;
+}
+
+/* Image */
+.event-card img {
+  max-width: 100%;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+/* Button container */
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+/* Join button */
+.join-button,
+.share-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: rgb(246, 144, 66); /* Blue color, you can change it */
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.join-button:hover,
+.share-button:hover {
+  background-color: #b35400; /* Darker blue on hover */
+}
+
+/* Media query for responsiveness */
+@media (max-width: 768px) {
+  .event-card {
+    padding: 15px;
+  }
+  .event-card h4 {
+    font-size: 1.2rem;
+  }
+}
