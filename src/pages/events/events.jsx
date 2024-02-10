@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import AllEvents from './components/allevents';
 import MyCreatedEvents from './components/mycreatedEvent';
+import JoinViaLink from './components/joinViaLink';
+import { Toaster } from 'react-hot-toast';
 import './events.css'; 
 
 function Events() {
@@ -12,6 +14,7 @@ function Events() {
 
     return (
         <div>
+            <Toaster />
             <h2>Events Contents</h2>
             <div className="tab-bar">
                 <button className={activeTab === 'all-events' ? 'active' : ''} onClick={() => handleTabChange('all-events')}>All Events</button>
@@ -34,10 +37,6 @@ function Events() {
 // Placeholder components for different tabs
 function UpcomingEvents() {
     return <div>Upcoming Events</div>;
-}
-
-function JoinViaLink() {
-    return <div>Join via Link</div>;
 }
 
 export default Events;

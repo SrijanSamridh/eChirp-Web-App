@@ -14,9 +14,12 @@ function AllEvents() {
     <div className="scrollable-container">
       <h3>All Events</h3>
       {loading ? (
-        <p>Loading events...</p>
+       // Render 10 skeleton loaders
+       Array.from({ length: 10 }, (_, index) => (
+        <EventCard.SkeletonLoader key={index} />
+      ))
       ) : (
-        events.map((event) => <EventCard key={event._id} event={event} />)
+        events.map((event) => <EventCard.Card key={event._id} event={event} />)
       )}
     </div>
   );
