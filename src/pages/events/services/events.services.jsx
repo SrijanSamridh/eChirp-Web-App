@@ -24,6 +24,32 @@ const fetchEvents = async (setEvents, setLoading, route = "") => {
   }
 };
 
+const joinViaCode = async (code) => {
+  try {
+    const token = localStorage.getItem("x-auth-token");
+    const response = await fetch(`https://api.eventchirp.com/api/events/join`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": token,
+      },
+      body: JSON.stringify({ eventID: code }),
+    });
+    console.log("Response:", response);
+    const responseData = await response.json();
+    if (response.ok) {
+      toast.success(responseData.message);
+      return true;
+    } else {
+      toast.error(responseData.message);
+      throw new Error(responseData.message);
+    }
+  } catch (error) {
+    console.error("Error joining event:", error.message);
+    return false;
+  }
+};
+
 const postRequest = async (body) => {
   try {
     const token = localStorage.getItem("x-auth-token");
@@ -52,7 +78,8 @@ const postRequest = async (body) => {
 
 const events = {
   fetchEvents,
-  postRequest,
+  joinViaCode,
+  postRequest
 };
 
 export default events;

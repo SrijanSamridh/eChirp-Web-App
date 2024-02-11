@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import AllEvents from './components/allevents';
 import MyCreatedEvents from './components/mycreatedEvent';
 import JoinViaLink from './components/joinViaLink';
+import UpcomingEvents from './components/upcomingEvents';
 import { Toaster } from 'react-hot-toast';
 import './events.css'; 
 
@@ -32,11 +33,6 @@ function Events() {
             </div>
         </div>
     );
-}
-
-// Placeholder components for different tabs
-function UpcomingEvents() {
-    return <div>Upcoming Events</div>;
 }
 
 export default Events;

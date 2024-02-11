@@ -8,12 +8,12 @@ function JoinViaLink() {
   const [response, setResponse] = useState(false);
 
   const handleJoin = async () => {
-    const success = await Events.postRequest(joinCode);
+    const success = await Events.joinViaCode(joinCode);
     setResponse(success);
     if (success) {
       setTimeout(() => {
         setResponse(false);
-      }, 5000); // Reset response to false after 3 seconds
+      }, 5000);
     }
   };
 
