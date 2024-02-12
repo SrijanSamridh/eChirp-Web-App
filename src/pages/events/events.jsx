@@ -13,9 +13,14 @@ function Events() {
         setActiveTab(tab);
     };
 
+    const createEvent = () => {
+        window.location.href="/create-event";
+    };
+
     return (
         <div>
             <Toaster />
+            <button onClick={createEvent}>Create Event</button>
             <h2>Events Contents</h2>
             <div className="tab-bar">
                 <button className={activeTab === 'all-events' ? 'active' : ''} onClick={() => handleTabChange('all-events')}>All Events</button>

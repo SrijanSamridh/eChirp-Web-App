@@ -1,4 +1,5 @@
 import "../events.css";
+import Event from "../services/events.services";
 
 // SkeletonLoader component
 const SkeletonLoader = () => (
@@ -14,13 +15,14 @@ const SkeletonLoader = () => (
 
 // Event Card Component
 function Card({ event }) {
-  const handleJoinNow = () => {
-    //Todo: Add logic to handle joining the event
+  const handleJoinNow =  async () => {
+    await Event.joinViaCode(event._id);
+    window.location.href="/";
     console.log("Join Now clicked for event:", event);
   };
 
   const handleShareEvent = () => {
-    //Todo: Add logic to handle sharing the event
+    //TODO: Add logic to handle sharing the event
     console.log("Share Event clicked for event:", event);
   };
 

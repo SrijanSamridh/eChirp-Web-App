@@ -1,0 +1,123 @@
+.main-container {
+  background-image: url("https://img.freepik.com/free-photo/happy-excited-friends-reunited_23-2149165087.jpg?size=626&ext=jpg&ga=GA1.1.119236241.1707224145&semt=country_rows_v1");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: rgba(255, 255, 255, 0.4);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  height: 100vh; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 30px;
+  padding: 20px;
+  max-width: calc(1200px - 500px);
+  width: 90%;
+}
+
+.form h3{
+  margin: 10px;
+}
+
+.step{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.circle-count, .active-count{
+  height: 50px;
+  width: 50px;
+  border: 2px solid orange;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.active-count{
+  background-color: #f58013;
+  color: white;
+}
+
+.line{
+  width: 75px;
+  height: 1px;
+  background-color: black;
+  margin-top: 30px;
+}
+
+.form-inner {
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 1200px;
+  width: calc(100vh - 50%);
+}
+
+.fields-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  height: auto;
+}
+
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+h2 {
+  margin-top: 0;
+}
+
+form {
+  display: grid;
+  grid-gap: 10px;
+}
+
+label {
+  display: block;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+input[type="time"],
+input[type="number"],
+textarea,
+input[type="file"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #f58013;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #b65e0c;
+}
+
+@media (max-width: 500px) {
+  .form {
+    margin: 20px auto;
+  }
+}
