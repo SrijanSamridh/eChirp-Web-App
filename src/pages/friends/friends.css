@@ -1,0 +1,97 @@
+.flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* friends.css */
+
+/* Container styles */
+.friends-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* Search input styles */
+  .search-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  /* Tab bar styles */
+  .tab-bar {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .tab-bar button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    font-size: 16px;
+    border: none;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .tab-bar button.active {
+    background-color: #f69042;
+    color: #fff;
+  }
+  
+  /* Friend card styles */
+  .friend {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+  }
+  
+  .friend img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 20px;
+  }
+  
+  .friend h4 {
+    margin-bottom: 5px;
+  }
+  
+  .friend p {
+    margin-bottom: 10px;
+  }
+  
+  /* Add/remove friend button styles */
+  .friend button {
+    margin: 10px 30px;
+    align-items: right;
+    padding: 8px 16px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    background-color: #f69042;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .friend button:hover {
+    background-color: #aa4e08;
+  }
+  
+  /* Toaster styles */
+  .toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+  }
+  

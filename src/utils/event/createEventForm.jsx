@@ -17,7 +17,8 @@ function CreateEventForm() {
     maxParticipants: 20,
     eventTitle: "",
     eventDescription: "",
-    coverImgUrl: "https://img.freepik.com/free-photo/happy-excited-friends-reunited_23-2149165087.jpg?size=626&ext=jpg&ga=GA1.1.119236241.1707224145&semt=country_rows_v1",
+    coverImgUrl:
+      "https://img.freepik.com/free-photo/happy-excited-friends-reunited_23-2149165087.jpg?size=626&ext=jpg&ga=GA1.1.119236241.1707224145&semt=country_rows_v1",
     Img1Url: "https://example.com/image1.jpg",
     Img2Url: "https://example.com/image2.jpg",
     Img3Url: "https://example.com/image3.jpg",
@@ -102,7 +103,7 @@ function CreateEventForm() {
                 </div>
 
                 {/* Inputs for Event Information */}
-                <div className="fields-container">
+                <div>
                   <div>
                     <label>
                       Event Title:
@@ -134,69 +135,23 @@ function CreateEventForm() {
                         required
                       />
                     </label>
-                    <label>
-                      Event Description:
-                      <textarea
-                        name="eventDescription"
-                        value={formData.eventDescription}
-                        onChange={handleChange}
-                        required
-                      />
-                    </label>
                   </div>
                 </div>
               </div>
-              <div>
-                {/* Inputs for Upload */}
-                <div>
-                  <label>
-                    Cover Image:
-                    <input
-                      type="file"
-                      accept="image/*"
-                      name="coverImgFile"
-                      onChange={handleChange}
-                      required
-                    />
-                  </label>
-                  <label>
-                    Image 1:
-                    <input
-                      type="file"
-                      accept="image/*"
-                      name="Img1File"
-                      onChange={handleChange}
-                    />
-                  </label>
-                  <label>
-                    Image 2:
-                    <input
-                      type="file"
-                      accept="image/*"
-                      name="Img2File"
-                      onChange={handleChange}
-                    />
-                  </label>
-                  <label>
-                    Image 3:
-                    <input
-                      type="file"
-                      accept="image/*"
-                      name="Img3File"
-                      onChange={handleChange}
-                    />
-                  </label>
-                  <label>
-                    Image 4:
-                    <input
-                      type="file"
-                      accept="image/*"
-                      name="Img4File"
-                      onChange={handleChange}
-                    />
-                  </label>
-                </div>
 
+              <div style={{ margin: "10px 30px" }}>
+                <label>
+                  Event Description:
+                  <textarea
+                    name="eventDescription"
+                    value={formData.eventDescription}
+                    onChange={handleChange}
+                    required
+                  />
+                </label>
+              </div>
+
+              <div className="fields-container">
                 {/* Inputs for Event Specifications */}
                 <div className="fields-container">
                   <div>
@@ -253,6 +208,58 @@ function CreateEventForm() {
                   </div>
                 </div>
 
+                {/* Inputs for Upload */}
+                <div>
+                  <label>
+                    Cover Image:
+                    <input
+                      type="file"
+                      accept="image/*"
+                      name="coverImgFile"
+                      onChange={handleChange}
+                      required
+                    />
+                  </label>
+                  <label>
+                    Image 1:
+                    <input
+                      type="file"
+                      accept="image/*"
+                      name="Img1File"
+                      onChange={handleChange}
+                    />
+                  </label>
+                  <label>
+                    Image 2:
+                    <input
+                      type="file"
+                      accept="image/*"
+                      name="Img2File"
+                      onChange={handleChange}
+                    />
+                  </label>
+                  <label>
+                    Image 3:
+                    <input
+                      type="file"
+                      accept="image/*"
+                      name="Img3File"
+                      onChange={handleChange}
+                    />
+                  </label>
+                  <label>
+                    Image 4:
+                    <input
+                      type="file"
+                      accept="image/*"
+                      name="Img4File"
+                      onChange={handleChange}
+                    />
+                  </label>
+                </div>
+              </div>
+
+              <div className="fields-container">
                 {/* Submit Button */}
                 <div
                   style={{
