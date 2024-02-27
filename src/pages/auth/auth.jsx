@@ -33,7 +33,7 @@ const Auth = () => {
   useEffect(() => {
     setTimeout(() => {
       if (localStorage.getItem("x-auth-token") != null) {
-        window.location.href = "/home";
+        window.location.href = "/home/profile";
       } else {
         setLoading(false);
       }

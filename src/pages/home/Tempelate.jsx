@@ -6,7 +6,10 @@ import { IoCalendar } from "react-icons/io5";
 import { FaUserFriends } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-export default function Tempelate({ children }) {
+export default function Tempelate({ children }){
+
+  // localStorage.setItem('sideNav', "profile");
+
   const [navigation, setNavigation] = useState(localStorage.getItem('sideNav'));
   const navigate = useNavigate();
   const handleNavigation = (nav) => {
