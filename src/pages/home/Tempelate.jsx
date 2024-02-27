@@ -1,23 +1,19 @@
 import React, { useState } from "react";
+import Header from "../../components/header";
 import Footer from "../../components/footer";
-import Header from "../../components/header"; // Corrected import
-import "./home.css";
-
 import { MdPerson } from "react-icons/md";
-import { IoCalendar } from "react-icons/io5"; // Corrected import
+import { IoCalendar } from "react-icons/io5";
 import { FaUserFriends } from "react-icons/fa";
-import Profile from "../profile/profile";
-import Events from "../events/events";
-import Friends from "../friends/friends";
+import { useNavigate } from "react-router-dom";
 
-function Home() {
-  const [navigation, setNavigation] = useState("profile");
-
-  // Function to handle navigation
+export default function Tempelate({ children }) {
+  const [navigation, setNavigation] = useState(localStorage.getItem('sideNav'));
+  const navigate = useNavigate();
   const handleNavigation = (nav) => {
     setNavigation(nav);
+    localStorage.setItem('sideNav', nav);
+    navigate(`/home/${nav}`);
   };
-
   return (
     <>
       <Header></Header>
@@ -47,16 +43,10 @@ function Home() {
               </ul>
             </nav>
           </div>
-          <div className="feed-block right">
-            {navigation === "Profile" && <Profile></Profile>}
-            {navigation === "Events" && <Events></Events>}
-            {navigation === "Friends" && <Friends></Friends>}
-          </div>
+          <div className="feed-block right">{children}</div>
         </header>
       </div>
       <Footer></Footer>
     </>
   );
 }
-
-export default Home;
