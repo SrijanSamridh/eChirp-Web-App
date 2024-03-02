@@ -131,19 +131,22 @@ const renderSearchResultsTab = (searchResults, handleAddFriend) => (
     ))}
   </div>
 );
+function generatePlaceholderUrl(firstLetter) {
+  return `https://via.placeholder.com/100x100?text=${firstLetter.toUpperCase()}`;
+}
 
 const renderPotentialFriendsTab = (potentialFriends, handleAddFriend) => (
   <div>
     <h3>Potential Friends</h3>
     {potentialFriends.map((friend) => (
-      <div key={friend._id} className="friend">
-        <img src={friend.profilePic} alt={friend.username} />
+      <div key={friend.friend._id} className="friend">
+        <img src={friend.friend.profilePic ?? generatePlaceholderUrl(friend.friend.username[0])} alt={friend.friend.username} />
         <div>
-          <h4>{friend.username}</h4>
-          <p>{friend.bio}</p>
-          <p>Mutual Friends: {friend.mutualFriends}</p>
+          <h4>{friend.friend.username}</h4>
+          <p>{friend.friend.bio}</p>
+          <p>Mutual Friends: {friend.count}</p>
         </div>
-        <button onClick={() => handleAddFriend(friend._id)}>
+        <button onClick={() => handleAddFriend(friend.friend._id)}>
           <BiUserPlus /> Add Friend
         </button>
       </div>
@@ -151,16 +154,16 @@ const renderPotentialFriendsTab = (potentialFriends, handleAddFriend) => (
   </div>
 );
 
+
 const renderMyFriendsTab = (myFriends, handleRemoveFriend) => (
   <div>
     <h3>My Friends</h3>
     {myFriends.map((friend) => (
       <div key={friend._id} className="friend">
-        <img src={friend.profilePic} alt={friend.username} />
+        <img src={friend.profilePic ?? generatePlaceholderUrl(friend.username[0])} alt={friend.username} />
         <div>
           <h4>{friend.username}</h4>
           <p>{friend.bio}</p>
-          <p>Mutual Friends: {friend.mutualFriends}</p>
         </div>
         <button onClick={() => handleRemoveFriend(friend._id)}>
           <BiUserMinus /> Remove Friend

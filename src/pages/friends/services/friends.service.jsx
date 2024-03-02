@@ -26,7 +26,16 @@ async function fetchMyFriends() {
 
 async function fetchPotentialFriends() {
   try {
-    const response = await fetch(API_URL + "/potential");
+    console.log("fetching...");
+    const token = localStorage.getItem("x-auth-token");
+    console.log(token);
+    const response = await fetch(API_URL + "/potential", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": token,
+      },
+    });
     if (!response.ok) {
       throw new Error("Error fetching potential friends");
     }
