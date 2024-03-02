@@ -1,11 +1,11 @@
-const API_URL = "https://api.eventchirp.com/api/friend";
+const API_URL = "https://e-chirp-server.vercel.app/api/friend";
 
 async function fetchMyFriends() {
   try {
     console.log("fetching...");
     const token = localStorage.getItem("x-auth-token");
     console.log(token);
-    const response = await fetch(API_URL + "/my-friends", {
+    const response = await fetch(API_URL + "/friends", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

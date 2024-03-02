@@ -17,7 +17,7 @@ const SkeletonLoader = () => (
 function Card({ event }) {
   const handleJoinNow =  async () => {
     await Event.joinViaCode(event._id);
-    window.location.href="/";
+    window.location.href=`/home/${localStorage.getItem('sideNav')}`;
     console.log("Join Now clicked for event:", event);
   };
 

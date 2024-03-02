@@ -1,6 +1,6 @@
 import { toast } from "react-hot-toast";
 
-const baseURL = `https://api.eventchirp.com/api/events`;
+const baseURL = `https://e-chirp-server.vercel.app/api/events`;
 
 const fetchEvents = async (setEvents, setLoading, route = "") => {
   try {
@@ -27,7 +27,7 @@ const fetchEvents = async (setEvents, setLoading, route = "") => {
 const joinViaCode = async (code) => {
   try {
     const token = localStorage.getItem("x-auth-token");
-    const response = await fetch(`https://api.eventchirp.com/api/events/join`, {
+    const response = await fetch(`https://e-chirp-server.vercel.app/api/events/join`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -53,7 +53,7 @@ const joinViaCode = async (code) => {
 async function postRequest(body) {
   try {
     const token = localStorage.getItem("x-auth-token");
-    const response = await fetch(`https://api.eventchirp.com/api/events`, {
+    const response = await fetch(`https://e-chirp-server.vercel.app/api/events`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

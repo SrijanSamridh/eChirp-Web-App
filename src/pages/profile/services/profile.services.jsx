@@ -1,6 +1,6 @@
 const fetchUserData = async (setUserData) => {
     try {
-        const response = await fetch('https://api.eventchirp.com/api/auth', {
+        const response = await fetch('https://e-chirp-server.vercel.app/api/auth', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -24,7 +24,7 @@ const fetchUserData = async (setUserData) => {
 
 const updateUserProfile = async (userData) => {
     try {
-        const response = await fetch('https://api.eventchirp.com/api/auth', {
+        const response = await fetch('https://e-chirp-server.vercel.app/api/auth', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

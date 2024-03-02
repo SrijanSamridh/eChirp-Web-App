@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
 
-const baseURL = "https://api.eventchirp.com/api";
+const baseURL = "https://e-chirp-server.vercel.app/api";
 
 const notify = (message, type = "success") => {
   switch (type) {
