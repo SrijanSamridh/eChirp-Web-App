@@ -1,5 +1,5 @@
-// const API_URL = "https://e-chirp-server.vercel.app/api/friend";
-const API_URL = "http://localhost:8080/api/friend";
+const API_URL = "https://e-chirp-server.vercel.app/api/friend";
+// const API_URL = "http://localhost:8080/api/friend";
 
 async function fetchMyFriends() {
   try {
