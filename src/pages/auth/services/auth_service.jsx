@@ -71,7 +71,7 @@ const handleLogin = async (username, password, e) => {
       localStorage.setItem("x-auth-token", data.user.token);
       localStorage.setItem("userId", data.user._id);
       localStorage.setItem("username", data.user.username);
-      window.location.href = "/home"; // Redirect to home page after login
+      window.location.href = "/home/profile";
       notify("Login Successful", "success");
     } else {
       alert(data.error || data.message || "Invalid credentials");

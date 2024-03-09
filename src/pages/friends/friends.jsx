@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import { BiUserPlus, BiUserMinus } from "react-icons/bi";
 import "./friends.css";
-import { fetchMyFriends, fetchPotentialFriends, searchUsers } from "./services/friends.service";
+import { fetchMyFriends, fetchPotentialFriends, searchUsers, fetchMyRequests, acceptRequest, removeFriend, addFriend } from "./services/friends.service";
 
 function Friends() {
   const [activeTab, setActiveTab] = useState("my-friends");
@@ -10,6 +10,10 @@ function Friends() {
   const [searchResults, setSearchResults] = useState([]);
   const [myFriends, setMyFriends] = useState([]);
   const [potentialFriends, setPotentialFriends] = useState([]);
+  const [requests,setRequests] = useState([]);
+  const [confirmedRequests,setConfirmedRequests] = useState([]);
+  const [declinedRequests,setDeclinedRequests] = useState([]);
+  const [removedFriends,setRemovedFriends] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -17,9 +21,15 @@ function Friends() {
         if (activeTab === "my-friends") {
           const data = await fetchMyFriends();
           setMyFriends(data);
+          setRemovedFriends([]);
         } else if (activeTab === "potential-friends") {
           const data = await fetchPotentialFriends();
           setPotentialFriends(data.potentialFriends);
+        } else if (activeTab === "requests") {
+          const data = await fetchMyRequests();
+          setConfirmedRequests([]);
+          setDeclinedRequests([]);
+          setRequests(data);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -50,9 +60,9 @@ function Friends() {
 
   const handleAddFriend = async (friendId) => {
     try {
-      // Make API call to add friend
-      // You need to implement this part in the service functions
+      const data = await addFriend(friendId);
       console.log(`Adding friend with ID ${friendId}`);
+      console.log(data);
     } catch (error) {
       console.error("Error adding friend:", error);
     }
@@ -60,9 +70,30 @@ function Friends() {
 
   const handleRemoveFriend = async (friendId) => {
     try {
-      // Make API call to remove friend
-      // You need to implement this part in the service functions
+      setRemovedFriends([...removedFriends,friendId]);
+      const data = await removeFriend(friendId);
       console.log(`Removing friend with ID ${friendId}`);
+      console.log(data);
+    } catch (error) {
+      console.error("Error removing friend:", error);
+    }
+  };
+
+  const handleAcceptRequest = async (friendId) => {
+    try {
+      setConfirmedRequests([...confirmedRequests,friendId]);
+      const data = await acceptRequest(friendId);
+      console.log(`Accepting friend request with ID ${friendId}`);
+      console.log(data);
+    } catch (error) {
+      console.error("Error removing friend:", error);
+    }
+  };
+
+  const handleRejectRequest = async (friendId) => {
+    try {
+      setDeclinedRequests([...declinedRequests,friendId]);
+      console.log(`Rejecting friend request with ID ${friendId}`);
     } catch (error) {
       console.error("Error removing friend:", error);
     }
@@ -82,6 +113,12 @@ function Friends() {
       </div>
 
       <div className="tab-bar">
+        <button
+          className={activeTab === "requests" ? "active" : ""}
+          onClick={() => handleTabChange("requests")}
+        >
+          Requests ({requests.length})
+        </button>
         <button
           className={activeTab === "my-friends" ? "active" : ""}
           onClick={() => handleTabChange("my-friends")}
@@ -104,10 +141,11 @@ function Friends() {
       <hr />
       <div className="scrollable-content">
         {/* Rendering different content based on the active tab */}
-        {activeTab === "my-friends" && renderMyFriendsTab(myFriends, handleRemoveFriend)}
+        {activeTab === "my-friends" && renderMyFriendsTab(myFriends,removedFriends,handleRemoveFriend,handleAddFriend)}
         {activeTab === "potential-friends" &&
-          renderPotentialFriendsTab(potentialFriends, handleAddFriend)}
+          renderPotentialFriendsTab(potentialFriends,handleAddFriend)}
         {activeTab === "search" && renderSearchResultsTab(searchResults, handleAddFriend)}
+        {activeTab === "requests" && renderMyRequestsTab(requests,confirmedRequests,declinedRequests,handleAcceptRequest,handleRejectRequest)}
       </div>
     </div>
   );
@@ -135,7 +173,7 @@ function generatePlaceholderUrl(firstLetter) {
   return `https://via.placeholder.com/100x100?text=${firstLetter.toUpperCase()}`;
 }
 
-const renderPotentialFriendsTab = (potentialFriends, handleAddFriend) => (
+const renderPotentialFriendsTab = (potentialFriends,handleAddFriend) => (
   <div>
     <h3>Potential Friends</h3>
     {potentialFriends.map((friend) => (
@@ -147,7 +185,7 @@ const renderPotentialFriendsTab = (potentialFriends, handleAddFriend) => (
           <p>Mutual Friends: {friend.count}</p>
         </div>
         <button onClick={() => handleAddFriend(friend.friend._id)}>
-          <BiUserPlus /> Add Friend
+            <BiUserPlus /> Add Friend
         </button>
       </div>
     ))}
@@ -155,7 +193,7 @@ const renderPotentialFriendsTab = (potentialFriends, handleAddFriend) => (
 );
 
 
-const renderMyFriendsTab = (myFriends, handleRemoveFriend) => (
+const renderMyFriendsTab = (myFriends,removedFriends,handleRemoveFriend,handleAddFriend) => (
   <div>
     <h3>My Friends</h3>
     {myFriends.map((friend) => (
@@ -165,9 +203,43 @@ const renderMyFriendsTab = (myFriends, handleRemoveFriend) => (
           <h4>{friend.username}</h4>
           <p>{friend.bio}</p>
         </div>
-        <button onClick={() => handleRemoveFriend(friend._id)}>
-          <BiUserMinus /> Remove Friend
-        </button>
+        {removedFriends.includes(friend._id) && (
+          <button onClick={() => handleAddFriend(friend._id)}>
+            <BiUserPlus /> Add Friend
+          </button>
+        )}
+        {!removedFriends.includes(friend._id) && (
+          <button onClick={() => handleRemoveFriend(friend._id)}>
+            <BiUserMinus /> Remove Friend
+          </button>
+        )}
+      </div>
+    ))}
+  </div>
+);
+
+const renderMyRequestsTab = (requests, confirmedRequests, declinedRequests, handleAcceptRequest, handleRejectRequest) => (
+  <div>
+    <h3>Requests</h3>
+    {requests.map((friend) => (
+      <div key={friend._id} className="friend">
+        <img src={friend.profilePic ?? generatePlaceholderUrl(friend.username[0])} alt={friend.username} />
+        <div>
+          <h4>{friend.username}</h4>
+          <p>{friend.bio}</p>
+        </div>
+        {confirmedRequests.includes(friend._id) && <span>Confirmed</span>}
+        {declinedRequests.includes(friend._id) && <span>Declined</span>}
+        {!confirmedRequests.includes(friend._id) && !declinedRequests.includes(friend._id) && (
+          <>
+            <button onClick={() => handleAcceptRequest(friend._id)}>
+              <BiUserPlus /> Confirm
+            </button>
+            <button onClick={() => handleRejectRequest(friend._id)}>
+              <BiUserMinus /> Decline
+            </button>
+          </>
+        )}
       </div>
     ))}
   </div>
