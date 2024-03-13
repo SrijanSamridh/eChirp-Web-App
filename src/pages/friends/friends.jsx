@@ -62,7 +62,6 @@ function Friends() {
     try {
       const data = await addFriend(friendId);
       console.log(`Adding friend with ID ${friendId}`);
-      console.log(data);
     } catch (error) {
       console.error("Error adding friend:", error);
     }
@@ -74,6 +73,7 @@ function Friends() {
       const data = await removeFriend(friendId);
       console.log(`Removing friend with ID ${friendId}`);
       console.log(data);
+      myFriends.length--;
     } catch (error) {
       console.error("Error removing friend:", error);
     }
@@ -85,6 +85,7 @@ function Friends() {
       const data = await acceptRequest(friendId);
       console.log(`Accepting friend request with ID ${friendId}`);
       console.log(data);
+      requests.length--;
     } catch (error) {
       console.error("Error removing friend:", error);
     }

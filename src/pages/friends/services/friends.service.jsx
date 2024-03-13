@@ -1,5 +1,23 @@
+import toast from "react-hot-toast";
 const API_URL = "https://e-chirp-server.vercel.app/api/friend";
 // const API_URL = "http://localhost:8080/api/friend";
+
+const notify = (message, type = "success") => {
+  switch (type) {
+    case "success":
+      toast.success(message);
+      break;
+    case "error":
+      toast.error(message);
+      break;
+    case "loading":
+      toast.loading(message);
+      break;
+    default:
+      toast(message);
+      break;
+  }
+};
 
 async function fetchMyFriends() {
   try {
@@ -128,7 +146,7 @@ async function removeFriend(friendID){
     console.log(token);
     console.log(friendID);
     const response = await fetch(API_URL + `/remove/${friendID}`, {
-      method: "GET",
+      method: "DELETE",
       headers: {
         "Content-Type": "application/json",
         "x-auth-token": token,
@@ -160,13 +178,14 @@ async function addFriend(friendID){
       body: JSON.stringify({friendID})
     });
     if (!response.ok) {
-      throw new Error("Error fetching my requests");
+      const error = await response.json();
+      notify(error.error,"error");
     }
     const data = await response.json();
+    notify(data.message,"success");
     return data;
   } catch (error) {
     console.error("Error fetching my requests:", error);
-    throw error;
   }
 }
 
